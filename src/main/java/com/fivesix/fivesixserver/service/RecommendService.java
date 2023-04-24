@@ -13,12 +13,12 @@ import java.util.List;
 public class RecommendService {
     @Autowired
     MovieMapper movieMapper;
-    public static List<Movie> userCFRecommend(String username, List<RelatedDTO> relatedDTOS){
-
+    public List<Movie> userCFRecommend(String username, List<RelatedDTO> relatedDTOS){
         List<Integer> recommendations = UserCF.recommend(username, relatedDTOS);
         List<Movie> movies = new ArrayList<>();
         for(int i = 0; i < recommendations.size(); i++){
             movies.add(movieMapper.get(recommendations.get(i)));
         }
+        return movies;
     }
 }

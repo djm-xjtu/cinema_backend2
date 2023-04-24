@@ -9,16 +9,12 @@ import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 public class Algorithm {
-    public static Map<String,Double> computeNeighbor(String key, Map<String,List<RelatedDTO>>  map,int type) {
+    public static Map<String,Double> computeNeighbor(String key, Map<String,List<RelatedDTO>> map, int type) {
         Map<String,Double> distMap = new TreeMap<>();
         List<RelatedDTO> userItems = map.get(key);
         map.forEach((k,v)->{
-            //排除此用户
             if(!k.equals(key)){
-                //关系系数
-                double coefficient = relateDist(v,userItems,type);
-                //关系距离
-                //   double distance=Math.abs(coefficient);
+                double coefficient = relateDist(v, userItems, type);
                 distMap.put(k,coefficient);
             }
         });
@@ -26,11 +22,11 @@ public class Algorithm {
     }
 
     private static double relateDist(List<RelatedDTO> xList, List<RelatedDTO> yList,int type) {
-        List<Double> xs= new ArrayList<>();
-        List<Double> ys= new ArrayList<>();
+        List<Double> xs = new ArrayList<>();
+        List<Double> ys = new ArrayList<>();
         xList.forEach(x->{
             yList.forEach(y->{
-                if(type==0){
+                if(type == 0){
                     if(x.getCinema_id().equals(y.getCinema_id())){
                         xs.add(x.getRating());
                         ys.add(y.getRating());

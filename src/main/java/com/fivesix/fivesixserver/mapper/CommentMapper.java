@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommentMapper {
     // add comment in comment table
-    @Select("INSERT INTO `comment` (`cinema_id`,`username`, `comment`, `mood`, `rating`) VALUES (#{cinema_id},#{username}, #{content}, #{mood}, #{rating})")
+    @Select("INSERT INTO `comment` (`cinema_id`,`username`, `comment`, `mood`, `rating`) VALUES (#{cinema_id},#{username}, #{comment}, #{mood}, #{rating})")
     void addComment(@Param("cinema_id") String cinema_id, @Param("username") String username, @Param("comment") String comment, @Param("mood") String mood, @Param("rating") double rating);
 
     // get all comments
