@@ -19,13 +19,13 @@ public class CommentController {
     CommentMapper commentMapper;
 
     @GetMapping("api/user/comment/add")
-    public Result addComment(@RequestParam(name = "commentId") String commentId, @RequestParam(name="username") String username, @RequestParam(name="comment") String comment, @RequestParam(name="comment_zh") String comment_zh) throws IOException, ClassNotFoundException {
-        double rating = commentService.getScore(comment);
+    public Result addComment(@RequestParam(name = "commentId") String commentId, @RequestParam(name="username") String username, @RequestParam(name="comment") String comment, @RequestParam(name="comment_zh") String comment_zh, @RequestParam(name="rating") double rating) throws IOException, ClassNotFoundException {
+        double score = commentService.getScore(comment_zh);
         String mood = null;
         // english
-        if(rating == 0){
+        if(score == 0){
             mood = "neutral";
-        } else if(rating > 0){
+        } else if(score > 0){
             mood = "positive";
         } else {
             mood = "negative";
