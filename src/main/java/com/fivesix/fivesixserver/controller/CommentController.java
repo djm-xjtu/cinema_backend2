@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 public class CommentController {
-    private final String apiKey = "";
     @Autowired
     CommentService commentService;
 
@@ -20,7 +19,7 @@ public class CommentController {
     CommentMapper commentMapper;
 
     @GetMapping("api/user/comment/add")
-    public Result addComment(@RequestParam(name = "commentId") String commentId, @RequestParam(name="username") String username, @RequestParam(name="comment") String comment) throws IOException, ClassNotFoundException {
+    public Result addComment(@RequestParam(name = "commentId") String commentId, @RequestParam(name="username") String username, @RequestParam(name="comment") String comment, @RequestParam(name="comment_zh") String comment_zh) throws IOException, ClassNotFoundException {
         double rating = commentService.getScore(comment);
         String mood = null;
         // english
@@ -31,7 +30,7 @@ public class CommentController {
         } else {
             mood = "negative";
         }
-        commentMapper.addComment(commentId, username, comment, mood, rating);
+        commentMapper.addComment(commentId, username, comment, comment_zh, mood, rating);
         return new Result(200, "success");
     }
     @GetMapping("api/user/comment/getall")
